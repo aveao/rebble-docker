@@ -1,9 +1,9 @@
-FROM debian:stable
+FROM debian:buster
 
 # update system and get base packages
 RUN apt-get update && \
-    apt-get install -y curl gcc git make python2.7 python2.7-dev python-dev python3-dev  python3-pip python python-virtualenv python3-virtualenv libfreetype6-dev bash-completion libsdl1.2debian \
-                       libfdt1 libpixman-1-0 libglib2.0-dev gawk && \
+    apt-get install -y curl gcc git make python2.7 python2.7-dev python-dev python3-dev python3-pip python python-virtualenv python3-virtualenv libfreetype6-dev bash-completion libsdl1.2debian \
+                       libfdt1 libpixman-1-0 libglib2.0-dev gawk libncurses5 vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -58,7 +58,7 @@ ENV PATH /opt/gcc-arm-none-eabi-9-2019-q4-major/bin/:${NVM_DIR}/versions/node/v$
 RUN /bin/bash -c "arm-none-eabi-gcc -v"
 
 # install sdk
-RUN yes | pebble sdk install https://github.com/aveao/PebbleArchive/raw/master/SDKCores/sdk-core-${PEBBLE_SDK_VERSION}.tar.bz2 && \
+RUN yes | pebble sdk install https://fgl.ave.zone/pub/PebbleArchive/SDKCores/sdk-core-${PEBBLE_SDK_VERSION}.tar.bz2 && \
     pebble sdk activate ${PEBBLE_SDK_VERSION}
 
 # set mount path
